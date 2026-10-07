@@ -1,0 +1,36 @@
+function sumIntervals(intervals) {
+  // Handle empty input edge case
+  if (!intervals || intervals.length === 0) return 0;
+​
+  // 1. Sort intervals by their start values in ascending order
+  const sorted = [...intervals].sort((a, b) => a[0] - b[0]);
+​
+  let total = 0;
+  // Initialize the tracking interval with the first interval's start and end
+  let curStart = sorted[0][0];
+  let curEnd = sorted[0][1];
+​
+  // 2. Iterate through the remaining intervals to merge overlaps
+  for (let i = 1; i < sorted.length; i++) {
+    const nextStart = sorted[i][0];
+    const nextEnd = sorted[i][1];
+​
+    // Check for overlap: next interval starts before or at the end of the current one
+    if (nextStart <= curEnd) {
+      // Extend current end to cover both intervals
+      curEnd = Math.max(curEnd, nextEnd);
+    } else {
+      // No overlap: add the completed interval's length to total
+      total += curEnd - curStart;
+      
+      // Move tracking window to the new non-overlapping interval
+      curStart = nextStart;
+      curEnd = nextEnd;
+    }
+  }
+​
+  // 3. Add the length of the final merged interval
+  total += curEnd - curStart;
+​
+  return total;
+}
