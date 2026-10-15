@@ -1,14 +1,10 @@
 function areYouPlayingBanjo(name) {
-  let result = "";
-​
-  // Loop through the first character only
-  for (let i = 0; i < 1; i++) {
-    if (name[i] === 'R' || name[i] === 'r') {
-      result = name + " plays banjo";
-    } else {
-      result = name + " does not play banjo";
-    }
+  // Check if the first letter of the name is 'R' or 'r'
+  if (name[0] === "R" || name[0] === "r") {
+    // If it starts with R/r, they play banjo
+    return `${name} plays banjo`;
+  } else {
+    // Otherwise, they do not play banjo
+    return `${name} does not play banjo`;
   }
-​
-  return result;
 }
